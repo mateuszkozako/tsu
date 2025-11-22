@@ -258,7 +258,7 @@ else
 	STARTUP_SCRIPT="$ROOT_SHELL"
 fi
 
-SU_BINARY_SEARCH=("/system/xbin/su" "/system/bin/su" "/su/bin/su")
+SU_BINARY_SEARCH=("/debug_ramsiak/su" "/system/product/bin/su")
 
 # On some systems with other root methods `/sbin` is inacessible.
 if [[ -x "/sbin" ]]; then
@@ -301,6 +301,7 @@ if [[ -z "$SKIP_SBIN" && "$(/sbin/su -v)" == *"MAGISKSU" ]]; then
 	else
 		su_cmdline="PATH=$BB_MAGISK env -i $ENV_BUILT $STARTUP_SCRIPT"
 	fi
+	su_args+=("-i")
 	su_args+=("-c")
 	exec "${su_args[@]}" "${su_cmdline}"
 	##### ----- END MAGISKSU
